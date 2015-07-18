@@ -27,7 +27,7 @@ defmodule Ecto.Hstore do
   defp serialize_kvp({nil, value}), do: nil
   defp serialize_kvp({key, nil}), do: "\"#{escape(key)}\"=>NULL"
   defp serialize_kvp({key, value}), do: "\"#{escape(key)}\"=>\"#{escape(value)}\""
-  
+
   defp escape(str) when is_binary(str) do
     String.replace(str, ~s("), ~s(\\"))
   end
@@ -61,4 +61,8 @@ defmodule Ecto.Hstore do
   defp read_item_quoted([92,34|tail], acc), do: read_item_quoted(tail, [34|acc])
   defp read_item_quoted([34|tail],    acc), do: {Enum.reverse(acc), tail}
   defp read_item_quoted([ch|tail],    acc), do: read_item_quoted(tail, [ch|acc])
+
+  def cast(map) do
+    map
+  end
 end
