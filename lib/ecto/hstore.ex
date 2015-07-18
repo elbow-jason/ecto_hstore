@@ -11,7 +11,7 @@ defmodule Ecto.Hstore do
   @doc """
   HStores are blank when given as maps and the maps have no keys.
   """
-  defdelegate blank?(value), to: Ecto.Type
+  #defdelegate blank?(value), to: Ecto.Type
 
   @doc """
   Converts an `Elixir.Map` into an serialized hstore string.
@@ -62,7 +62,9 @@ defmodule Ecto.Hstore do
   defp read_item_quoted([34|tail],    acc), do: {Enum.reverse(acc), tail}
   defp read_item_quoted([ch|tail],    acc), do: read_item_quoted(tail, [ch|acc])
 
-  def cast(map) do
-    map
+  def cast(map) when map |> is_map do
+    {:ok, map}
   end
+  def cast(_), do: :error
+
 end

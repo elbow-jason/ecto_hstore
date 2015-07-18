@@ -38,6 +38,8 @@ defmodule Ecto.Hstore.Mixfile do
   end
 
   defp deps do
-    [{:ecto, ">= 0.5.0"}]
+    [
+      {:ecto, ">= 0.5.0"}
+    ]
   end
 end
