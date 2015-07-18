@@ -63,7 +63,7 @@ defmodule Ecto.Hstore do
   defp read_item_quoted([ch|tail],    acc), do: read_item_quoted(tail, [ch|acc])
 
   def cast(map) when map |> is_map do
-    {:ok, map}
+    {:ok, dump(map)}
   end
   def cast(_), do: :error
 
